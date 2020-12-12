@@ -1,16 +1,26 @@
 /**
  * Tushar Vengurlekar
  */
-var jokesLib = require('./lib/jokes')
+var jokesLib    = require('./lib/jokes')
+var mathLib     = require('./lib/math')     
 
 var app = {}
 
-app.getRandomJokes = function() {
-    
-    var jokes = jokesLib.getJokes()
-
-    console.log(jokes)
+app.config = {
+    'interval' : 1000
 }
 
+app.printJoke = function() {
+    
+    var allJokes = jokesLib.getJokes()
 
-app.getRandomJokes()
+    var randomNumber = mathLib.getRandomNumber(1, allJokes.length)
+
+    console.log(allJokes[randomNumber-1])
+}
+
+app.infiniteLoop = function () {
+    setInterval(app.printJoke, app.config.interval)
+}
+
+app.infiniteLoop()
